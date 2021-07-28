@@ -1,16 +1,18 @@
-package br.com.zupacademy.carolina.casadocodigo.Autor;
+package br.com.zupacademy.carolina.casadocodigo.autor;
 
+import br.com.zupacademy.carolina.casadocodigo.autor.validator.EmailUnico;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.time.Instant;
 
-public class AutorDto {
+public class AutorRequest {
 
 
     @NotBlank
     @Email
+    @EmailUnico(message = "email já existe no banco de dados")
     private String email;
 
     @NotBlank
@@ -20,16 +22,15 @@ public class AutorDto {
     @Length(max = 400)
     private String descricao;
 
-    public AutorDto(Long id, Instant instante, String email, String nome, String descricao) {
+    public AutorRequest(String email, String nome, String descricao) {
 
         this.email = email;
         this.nome = nome;
         this.descricao = descricao;
     }
 
-    public AutorDto(AutorModel autorModel) {
+    public AutorRequest(AutorModel autorModel) {
     }
-
 
     public String getEmail() {
         return email;

@@ -1,4 +1,4 @@
-package br.com.zupacademy.carolina.casadocodigo.Autor;
+package br.com.zupacademy.carolina.casadocodigo.autor;
 
 import org.hibernate.validator.constraints.Length;
 
@@ -21,6 +21,7 @@ public class AutorModel {
 
     @NotBlank
     @Email
+    @Column(unique = true)
     private String email;
 
     @NotBlank
@@ -34,6 +35,10 @@ public class AutorModel {
         this.email = email;
         this.nome = nome;
         this.descricao = descricao;
+    }
+
+    @Deprecated
+    public AutorModel() {
     }
 
 
