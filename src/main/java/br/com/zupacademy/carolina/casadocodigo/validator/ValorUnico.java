@@ -1,4 +1,4 @@
-package br.com.zupacademy.carolina.casadocodigo.autor.validator;
+package br.com.zupacademy.carolina.casadocodigo.validator;
 
 
 import javax.validation.Constraint;
@@ -11,14 +11,18 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 @Target({FIELD})
 @Retention(RUNTIME)
-@Constraint(validatedBy = ValidacaoEmailDuplicadoAutor.class)
-public @interface EmailUnico {
+@Constraint(validatedBy = {UniqueValueValidator.class})
+public @interface ValorUnico {
 
-    String message() default "Já existe um autor com o mesmo e-mail";
+    String message() default "Valor já existe no banco de dados";
 
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
+
+    String fieldName();
+
+    Class<?> domainClass();
 
     String value() default "";
 }

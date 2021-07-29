@@ -37,7 +37,6 @@ public class AutorModel {
         this.descricao = descricao;
     }
 
-    @Deprecated
     public AutorModel() {
     }
 

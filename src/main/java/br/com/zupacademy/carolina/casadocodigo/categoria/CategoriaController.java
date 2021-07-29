@@ -1,5 +1,4 @@
-package br.com.zupacademy.carolina.casadocodigo.autor;
-
+package br.com.zupacademy.carolina.casadocodigo.categoria;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -8,22 +7,23 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/autores")
-public class AutorController {
+@RequestMapping("/categorias")
+public class CategoriaController {
 
     @Autowired
-    private AutorRepository autorRepository;
+    CategoriaRepository categoriaRepository;
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<AutorRequest> cadastrarAutor(@RequestBody @Valid AutorRequest dto){
-        AutorModel autorModel = dto.converter(autorRepository);
-        autorRepository.save(autorModel);
+    public ResponseEntity<CategoriaRequest> cadastrarCategoria(@RequestBody @Valid CategoriaRequest dto){
+        CategoriaModel categoriaModel = dto.converter(categoriaRepository);
+        categoriaRepository.save(categoriaModel);
+
         return ResponseEntity.ok().build();
 
     }
+
 
 }
