@@ -40,6 +40,7 @@ public class AutorRequest {
     }
 
     public AutorModel converter(AutorRepository autor) {
+
         return new AutorModel(this.email, this.nome, this.descricao);
     }
 }
