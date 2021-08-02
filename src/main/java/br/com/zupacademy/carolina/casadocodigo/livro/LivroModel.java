@@ -2,6 +2,7 @@ package br.com.zupacademy.carolina.casadocodigo.livro;
 
 import br.com.zupacademy.carolina.casadocodigo.autor.AutorModel;
 import br.com.zupacademy.carolina.casadocodigo.categoria.CategoriaModel;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
@@ -36,11 +37,14 @@ public class LivroModel {
     @Future
     @NotNull
     private LocalDate dataPublicacao;
+    @NotNull
     @ManyToOne
     private AutorModel autorModel;
+    @NotNull
     @ManyToOne
     private CategoriaModel categoriaModel;
 
+    @Deprecated
     public LivroModel() {
     }
 
@@ -48,6 +52,23 @@ public class LivroModel {
                       Integer numeroPaginas, String isbn, LocalDate dataPublicacao,
                       @Valid AutorModel autor, @Valid CategoriaModel categoria) {
 
+        this.id = id;
+        this.titulo = titulo;
+        this.resumo = resumo;
+        this.sumario = sumario;
+        this.preco = preco;
+        this.numeroPaginas = numeroPaginas;
+        this.isbn = isbn;
+        this.dataPublicacao = dataPublicacao;
+        this.autorModel = autor;
+        this.categoriaModel = categoria;
+    }
 
+    public Long getId() {
+        return id;
+    }
+
+    public String getTitulo() {
+        return titulo;
     }
 }

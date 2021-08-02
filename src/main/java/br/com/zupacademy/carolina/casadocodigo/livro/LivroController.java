@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/livros")
@@ -26,10 +27,18 @@ public class LivroController {
     private CategoriaRepository categoriaRepository;
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> cadastraLivro(@Valid @RequestBody LivroRequest livro){
+    public ResponseEntity<LivroRequest> cadastraLivro(@RequestBody @Valid LivroRequest livro){
         LivroModel livroModel = livro.converter(autorRepository,categoriaRepository);
         livroRepository.save(livroModel);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping
+    public List<ListaLivroResponse> listaLivros(){
+
+        List<LivroModel> livros = livroRepository.findAll();
+
+        return ListaLivroResponse.converter(livros);
     }
 
 

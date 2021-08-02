@@ -8,35 +8,42 @@ import br.com.zupacademy.carolina.casadocodigo.categoria.CategoriaRepository;
 import br.com.zupacademy.carolina.casadocodigo.validator.ExistsId;
 import br.com.zupacademy.carolina.casadocodigo.validator.ValorUnico;
 import com.fasterxml.jackson.annotation.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Optional;
+import java.time.format.DateTimeFormatter;
 
 public class LivroRequest {
 
     @NotBlank
+    @JsonProperty(value="titulo")
     private String titulo;
 
     @NotBlank
     @Size(max = 500)
+    @JsonProperty(value="resumo")
     private String resumo;
 
     @Lob
     @NotBlank
+    @JsonProperty(value="sumario")
     private String sumario;
 
     @NotNull
     @Min(20)
+    @JsonProperty(value="preco")
     private BigDecimal preco;
 
     @Min(100)
+    @JsonProperty(value="numeroPaginas")
     private Integer numeroPaginas;
 
     @NotBlank
     @ValorUnico(domainClass = LivroModel.class, fieldName="isbn")
+    @JsonProperty(value="isbn")
     private String isbn;
 
     @Future
@@ -45,16 +52,23 @@ public class LivroRequest {
 
     @NotNull
     @ExistsId(domainClass = CategoriaModel.class, fieldName="id")
+    @JsonProperty(value="idCategoria")
     private Long idCategoria;
 
     @NotNull
     @ExistsId(domainClass = AutorModel.class, fieldName="id")
+    @JsonProperty(value="idAutor")
     private Long idAutor;
+
+
+    public LivroRequest() {
+    }
 
     public LivroRequest(String titulo, String resumo, String sumario, BigDecimal preco,
                         Integer numeroPaginas, String isbn, LocalDate dataPublicacao,
                         Long idCategoria, Long idAutor) {
         this.titulo = titulo;
+        this.resumo = resumo;
         this.sumario = sumario;
         this.preco = preco;
         this.numeroPaginas = numeroPaginas;
@@ -69,11 +83,12 @@ public class LivroRequest {
     }
 
     public LivroModel converter(AutorRepository autorRepository, CategoriaRepository categoriaRepository) {
-        @NotNull AutorModel autor = autorRepository.findById(idAutor).get();
-        @NotNull CategoriaModel categoria = categoriaRepository.findById(idCategoria).get();
+        AutorModel autor = autorRepository.findById(idAutor).get();
+        CategoriaModel categoria = categoriaRepository.findById(idCategoria).get();
 
         return new LivroModel(this.titulo,this.resumo, this.sumario,
                 this.preco, this.numeroPaginas, this.isbn, this.dataPublicacao,
                 autor, categoria);
     }
+
 }
