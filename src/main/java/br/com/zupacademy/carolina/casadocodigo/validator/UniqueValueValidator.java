@@ -10,7 +10,6 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.List;
 
-
 public class UniqueValueValidator implements ConstraintValidator<ValorUnico, Object> {
 
     private String domainAttribute;

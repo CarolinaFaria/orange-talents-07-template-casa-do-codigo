@@ -7,14 +7,13 @@ import br.com.zupacademy.carolina.casadocodigo.categoria.CategoriaModel;
 import br.com.zupacademy.carolina.casadocodigo.categoria.CategoriaRepository;
 import br.com.zupacademy.carolina.casadocodigo.validator.ExistsId;
 import br.com.zupacademy.carolina.casadocodigo.validator.ValorUnico;
-import com.fasterxml.jackson.annotation.*;
-import org.springframework.format.annotation.DateTimeFormat;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.persistence.*;
+import javax.persistence.Lob;
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class LivroRequest {
 
