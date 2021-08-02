@@ -10,4 +10,5 @@ public interface EstadoRepository extends JpaRepository<Estado, Long> {
 
     Optional<Object> findByPaisId(Object value);
 
+    Estado getById(Long idEstado);
 }

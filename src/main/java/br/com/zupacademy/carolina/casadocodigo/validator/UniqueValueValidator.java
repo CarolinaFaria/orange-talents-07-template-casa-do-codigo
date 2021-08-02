@@ -10,6 +10,7 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.List;
 
+
 public class UniqueValueValidator implements ConstraintValidator<ValorUnico, Object> {
 
     private String domainAttribute;
@@ -30,7 +31,6 @@ public class UniqueValueValidator implements ConstraintValidator<ValorUnico, Obj
         List<?> list = query.getResultList();
         Assert.state(list.size() <=1,
                 "Foi encontrado mais de um "+klass+" com o atributo "+domainAttribute+" = "+value);
-
         return list.isEmpty();
     }
 }

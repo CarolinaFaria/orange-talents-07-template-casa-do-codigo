@@ -1,7 +1,5 @@
 package br.com.zupacademy.carolina.casadocodigo.exceptions;
 
-import org.springframework.validation.FieldError;
-
 import java.util.ArrayList;
 import java.util.List;
 
